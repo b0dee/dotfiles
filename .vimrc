@@ -5,24 +5,18 @@ Plug 'tpope/vim-fugitive'                               " Best git plugin for Vi
 Plug 'junegunn/gv.vim'                                  " Git commit browser for Vim (dependancy: vim-fugitive)
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }   " Best Vim file explorer
 Plug 'Xuyuanp/nerdtree-git-plugin'                      " Git plugin for NERDTree
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'itchyny/lightline.vim'
-"Plug ''
 Plug 'junegunn/vim-easy-align'                          " Easy aligning by delimiter
 Plug 'junegunn/rainbow_parentheses.vim'                 " Rainbow parenthesis
 Plug 'mhinz/vim-signify'                                " Show changed lines in a file managed by a VCS
 Plug 'dense-analysis/ale'                               " Language server, linting (async lint engine)
-Plug 'ryanoasis/vim-devicons'                           " Pretty icons in Vim
 Plug 'lambdalisue/battery.vim/'                         " Show battery percentage in status bar
 call plug#end()
 " ------ FIXING VIM 'FEATURES' ------ "
 
 " Stop annoying error bells/visuals
-set noerrorbells visualbell t_vb=
-if has('autocmd')
-  autocmd GUIEnter * set visualbell t_vb=
-endif
-
+autocmd GUIEnter * set vb t_vb=                       " Disable error bells and visual flash for GUI
+autocmd VimEnter * set vb t_vb=                       " Same as above but terminal
 " Fix colours
 if !has('gui_running')
     set t_Co=256                                        " Set number of colours available
@@ -51,19 +45,23 @@ set background=dark                                     " Background colour them
 set mouse=a                                             " Enable mouse support
 set cursorline
 set matchpairs+=<:>                                     " Enable matching for tags
-"set showmatch                                           " Show matching pairs of [],() and {} (and <> from above line)
+set showmatch                                           " Show matching pairs of [],() and {} (and <> from above line)
 set scroll=0                                            " Moves by 1/2 # of lines in window when using CTRL+D and CTRL+U
 set ttyfast                                             " Enable fast scrolling
 set viminfo='100,<9999,s100                             " Store info from no more than 100 files at a time, 9999 lines of text, 100kb of data. Useful for copying large amounts of data between files.
 set noshowmode                                          " No need to notify mode changes, we have them visible perma
-
+set termguicolors                                       " Enable use of all colours
+colorscheme desert                                      " Set colour scheme
 highlight SpellBad cterm=bold ctermbg=darkred           " Spelling error highlighting
 highlight CursorLine cterm=bold ctermbg=black           " Cursor line settings
 
 
 
-set termguicolors                                       " Enable use of all colours
-colorscheme desert                                      " Set colour scheme
+
+
+" ----- Rainbow ----- "
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], [ '{', '}'], [ '"', '"' ], [ '''', ''''] ]
+autocmd VimEnter * RainbowParentheses
 
 " ----- Status Line ----- "
 let g:unite_force_overwrite_statusline = 0
@@ -71,17 +69,38 @@ let g:vimfiler_force_overwrite_statusline = 0
 let g:vimshell_force_overwrite_statusline = 0
 let g:lightline = {
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'absolutepath', 'modified' ] ],
-		  \ 'right': [ [ 'lineinfo' ],
-		  \            [ 'percent' ],
-		  \            [ 'filetype', 'fileencoding', 'fileformat' ] ],
-      \ },
+      \   'left': [ [ 'mode', 'paste' ], [ 'gitbranch', 'readonly', 'absolutepath', 'modified' ] ],
+      \ 'right': [ ['showbattery' ], [ 'lineinfo' ], [ 'percent' ], [ 'filetype', 'fileencoding', 'fileformat', 'lineinfo', ] ], },
       \ 'component_function': {
       \   'gitbranch': 'FugitiveHead',
       \ },
+      \ 'component': {
+      \   'showbattery': '%{battery#component()}',
+      \   'lineinfo': '%3l:%-2v%<',
+      \ }
       \ }
 
+" ----- Nerd Tree ----- "
+" Map shortcut
+nnoremap <C-n> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1 
+let NERDTreeQuitOnOpen=1
+
+" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
+autocmd BufEnter * if winnr() == winnr('h') && bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+                \ 'Modified'  :'M',
+                \ 'Staged'    :'S',
+                \ 'Untracked' :'U',
+                \ 'Renamed'   :'R',
+                \ 'Unmerged'  :'U',
+                \ 'Deleted'   :'X',
+                \ 'Dirty'     :'D',
+                \ 'Ignored'   :'I',
+                \ 'Clean'     :'C',
+                \ 'Unknown'   :'?',
+                \ }
 
 " ----- Mappings ----- "
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -90,4 +109,8 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-nnoremap <C-n> :NERDTreeToggle<CR>
+
+
+
+
+
