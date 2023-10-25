@@ -66,14 +66,9 @@ set termguicolors                                       " Enable use of all colo
 colorscheme desert                                      " Set colour scheme
 
 " ----- Status Line ----- "
-
-
-function! LightlineFilename()
-  return &filetype ==# 'vimfiler' ? vimfiler#get_status_string() :
-        \ &filetype ==# 'unite' ? unite#get_status_string() :
-        \ &filetype ==# 'vimshell' ? vimshell#get_status_string() :
-        \ expand('%:t') !=# '' ? expand('%:f') : '[No Name]'
-endfunction
+let g:unite_force_overwrite_statusline = 0
+let g:vimfiler_force_overwrite_statusline = 0
+let g:vimshell_force_overwrite_statusline = 0
 let g:lightline = {
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
@@ -87,13 +82,8 @@ let g:lightline = {
       \ },
       \ }
 
-let g:unite_force_overwrite_statusline = 0
-let g:vimfiler_force_overwrite_statusline = 0
-let g:vimshell_force_overwrite_statusline = 0
 
-"set statusline=%{FugitiveHead()}\ %r%4*\ %y%*%4*\ %F%*%2*%m%*%2*%r%*%1*%=\ Line\ %l\/%L\ [%p%%]\ \|\ %{strftime('%a\ %I:%M%p\ %d/%m/%Y')} " Status line content
 " ----- Mappings ----- "
-
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 
