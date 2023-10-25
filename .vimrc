@@ -11,6 +11,7 @@ Plug 'junegunn/rainbow_parentheses.vim'                 " Rainbow parenthesis
 Plug 'mhinz/vim-signify'                                " Show changed lines in a file managed by a VCS
 Plug 'dense-analysis/ale'                               " Language server, linting (async lint engine)
 Plug 'lambdalisue/battery.vim/'                         " Show battery percentage in status bar
+Plug 'mhinz/vim-startify'
 call plug#end()
 " ------ FIXING VIM 'FEATURES' ------ "
 
@@ -101,6 +102,13 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
                 \ 'Clean'     :'C',
                 \ 'Unknown'   :'?',
                 \ }
+
+
+" ----- Startify ----- "
+let g:startify_session_dir = '$HOME/vimfiles/session'
+let g:startify_files_number = 10
+
+
 
 " ----- Mappings ----- "
 " Start interactive EasyAlign in visual mode (e.g. vipga)
