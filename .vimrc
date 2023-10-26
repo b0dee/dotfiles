@@ -84,25 +84,27 @@ highlight CursorLine cterm=bold ctermbg=black           " Cursor line settings
 
 
 " ------ Rainbow ------ "
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], [ '{', '}'], [ '"', '"' ], [ '''', ''''] ]
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], [ '{', '}'] ]            " Couldn't get quotes working, [ '"', '"' ], [ '''', ''''] ]
 autocmd VimEnter * RainbowParentheses
 
 " ------ Status Line ------ "
+let g:battery#update_statusline = 1
 let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
 let g:vimshell_force_overwrite_statusline = 0
 let g:lightline = {
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'gitbranch', 'readonly', 'absolutepath', 'modified' ] ],
-      \ 'right': [ ['showbattery' ], [ 'lineinfo' ], [ 'percent' ], [ 'filetype', 'fileencoding', 'fileformat', 'lineinfo', ] ], },
-      \ 'component_function': {
-      \   'gitbranch':'FugitiveHead',
-      \ },
-      \ 'component': {
-      \   'showbattery': '%{battery#component()}',
-      \   'lineinfo': '%3l:%-2v%<',
-      \ }
-      \ }
+                \   'active': {
+                \     'left': [ [ 'mode', 'paste' ], [ 'gitbranch', 'readonly', 'absolutepath', 'modified' ] ],
+                \     'right': [ ['battery' ], [ 'lineinfo' ], [ 'percent' ], [ 'filetype', 'fileencoding', 'fileformat', 'lineinfo', ] ], 
+                \   },
+                \   'component_function': {
+                \     'gitbranch':'FugitiveHead',
+                \     'battery': 'battery#component',
+                \   },
+                \   'component': {
+                \     'lineinfo': '%3l:%-2v%<',
+                \   }
+                \ }
 
 " ------ Nerd Tree ------ "
 " Map shortcut
@@ -143,8 +145,6 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
-
-
 
 
 
