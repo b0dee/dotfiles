@@ -62,7 +62,7 @@ set wildignore+=*.pyc,*.exe,*.flv,*.img,*.xlsx          " Above continued
 set encoding=utf-8                                      " Document encoding
 set path+=.,,**;                                        " Set path to be current dir, dir of current file and search them recursively
 set laststatus=2                                        " Show status line at all times (regardless of # files open)
-set colorcolumn=150                                     " Set Colour Column line
+set colorcolumn=                                        " Set Colour Column line
 set nospell                                             " Disable spell checking, we enable it ad-hoc when needed
 set background=dark                                     " Background colour theming
 set mouse=a                                             " Enable mouse support
@@ -74,7 +74,7 @@ set ttyfast                                             " Enable fast scrolling
 set viminfo='100,<9999,s100                             " Store info from no more than 100 files at a time, 9999 lines of text, 100kb of data. Useful for copying large amounts of data between files.
 set noshowmode                                          " No need to notify mode changes, we have them visible perma
 set termguicolors                                       " Enable use of all colours
-let g:bujo#todo_file_path= '~/vimfiles/bujo'        " Buju cache dir
+let g:bujo#todo_file_path= '$HOME/vimfiles/bujo'        " Buju cache dir
 colorscheme desert                                      " Set colour scheme
 highlight SpellBad cterm=bold ctermbg=darkred           " Spelling error highlighting
 highlight CursorLine cterm=bold ctermbg=black           " Cursor line settings
@@ -128,13 +128,13 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 
 
 " ------ Startify ------ "
-let g:startify_session_dir = '~/vimfiles/session'
+let g:startify_session_dir = '$HOME/vimfiles/session'
 let g:startify_files_number = 10
 
 
 " ------ Bujo ------ "
-if !isdirectory('~/vimfiles/bujo')
-    call mkdir('~/vimfiles/bujo', "p")
+if !isdirectory('$HOME/vimfiles/bujo')
+    call mkdir('$HOME/vimfiles/bujo', "p")
 endif
 
 " ------ Mappings ------ "
