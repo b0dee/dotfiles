@@ -3,7 +3,7 @@ call plug#begin()
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }     " Fuzzy Finder Plugin for fast seaching - fzf#install() downloads latest binary (needed)
 Plug 'tpope/vim-fugitive'                               " Best git plugin for Vim
 Plug 'junegunn/gv.vim'                                  " Git commit browser for Vim (dependancy: vim-fugitive)
-Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }   " Best Vim file explorer
+Plug 'preservim/nerdtree'                               " Best Vim file explorer
 Plug 'Xuyuanp/nerdtree-git-plugin'                      " Git plugin for NERDTree
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/vim-easy-align'                          " Easy aligning by delimiter
@@ -12,7 +12,29 @@ Plug 'mhinz/vim-signify'                                " Show changed lines in 
 Plug 'dense-analysis/ale'                               " Language server, linting (async lint engine)
 Plug 'lambdalisue/battery.vim/'                         " Show battery percentage in status bar
 Plug 'mhinz/vim-startify'
+Plug 'vuciv/vim-bujo'
 call plug#end()
+
+" ------ Auto Updating Plugins Weekly ------ "
+function! OnVimEnter() abort
+  " Run PlugUpdate every week automatically when entering Vim.
+  if exists('g:plug_home')
+    let l:filename = printf('%s/.vim_plug_update', g:plug_home)
+    if !filereadable(l:filename)
+      call writefile([], l:filename)
+    endif
+
+    let l:this_week = strftime('%Y_%V')
+    let l:contents = readfile(l:filename)
+    if index(l:contents, l:this_week) < 0
+      call execute('PlugUpdate')
+      call writefile([l:this_week], l:filename, 'a')
+    endif
+  endif
+endfunction
+
+autocmd VimEnter * call OnVimEnter()
+
 " ------ FIXING VIM 'FEATURES' ------ "
 
 " Stop annoying error bells/visuals
@@ -52,6 +74,7 @@ set ttyfast                                             " Enable fast scrolling
 set viminfo='100,<9999,s100                             " Store info from no more than 100 files at a time, 9999 lines of text, 100kb of data. Useful for copying large amounts of data between files.
 set noshowmode                                          " No need to notify mode changes, we have them visible perma
 set termguicolors                                       " Enable use of all colours
+let g:bujo#todo_file_path= '~/vimfiles/bujo'        " Buju cache dir
 colorscheme desert                                      " Set colour scheme
 highlight SpellBad cterm=bold ctermbg=darkred           " Spelling error highlighting
 highlight CursorLine cterm=bold ctermbg=black           " Cursor line settings
@@ -60,11 +83,11 @@ highlight CursorLine cterm=bold ctermbg=black           " Cursor line settings
 
 
 
-" ----- Rainbow ----- "
+" ------ Rainbow ------ "
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], [ '{', '}'], [ '"', '"' ], [ '''', ''''] ]
 autocmd VimEnter * RainbowParentheses
 
-" ----- Status Line ----- "
+" ------ Status Line ------ "
 let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
 let g:vimshell_force_overwrite_statusline = 0
@@ -81,7 +104,7 @@ let g:lightline = {
       \ }
       \ }
 
-" ----- Nerd Tree ----- "
+" ------ Nerd Tree ------ "
 " Map shortcut
 nnoremap <C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1 
@@ -104,13 +127,17 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
                 \ }
 
 
-" ----- Startify ----- "
+" ------ Startify ------ "
 let g:startify_session_dir = '$HOME/vimfiles/session'
 let g:startify_files_number = 10
 
 
+" ------ Bujo ------ "
+if !isdirectory('~/vimfiles/bujo')
+    call mkdir('~/vimfiles/bujo', "p")
+endif
 
-" ----- Mappings ----- "
+" ------ Mappings ------ "
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 
