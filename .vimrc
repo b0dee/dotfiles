@@ -96,7 +96,7 @@ let g:lightline = {
       \   'left': [ [ 'mode', 'paste' ], [ 'gitbranch', 'readonly', 'absolutepath', 'modified' ] ],
       \ 'right': [ ['showbattery' ], [ 'lineinfo' ], [ 'percent' ], [ 'filetype', 'fileencoding', 'fileformat', 'lineinfo', ] ], },
       \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead',
+      \   'gitbranch':'FugitiveHead',
       \ },
       \ 'component': {
       \   'showbattery': '%{battery#component()}',
@@ -128,7 +128,7 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 
 
 " ------ Startify ------ "
-let g:startify_session_dir = '$HOME/vimfiles/session'
+let g:startify_session_dir = '~/vimfiles/session'
 let g:startify_files_number = 10
 
 
