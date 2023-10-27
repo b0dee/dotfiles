@@ -5,16 +5,17 @@ Plug 'tpope/vim-fugitive'                               " Best git plugin for Vi
 Plug 'junegunn/gv.vim'                                  " Git commit browser for Vim (dependancy: vim-fugitive)
 Plug 'preservim/nerdtree'                               " Best Vim file explorer
 Plug 'Xuyuanp/nerdtree-git-plugin'                      " Git plugin for NERDTree
-Plug 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim'                            " Vim Status Line 
 Plug 'junegunn/vim-easy-align'                          " Easy aligning by delimiter
-Plug 'junegunn/rainbow_parentheses.vim'                 " Rainbow parenthesis
+Plug 'luochen1990/rainbow'                              " Rainbow parenthesis - improved
 Plug 'mhinz/vim-signify'                                " Show changed lines in a file managed by a VCS
 Plug 'dense-analysis/ale'                               " Language server, linting (async lint engine)
 Plug 'lambdalisue/battery.vim/'                         " Show battery percentage in status bar
-Plug 'mhinz/vim-startify'
-Plug 'vuciv/vim-bujo'
+Plug 'mhinz/vim-startify'                               " Vim Start Screen
+Plug 'vuciv/vim-bujo'                                   " Bullet Journal for Vim
+Plug 'MattesGroeger/vim-bookmarks'                      " Vim bookmarking
+Plug 'vimwiki/vimwiki'                                  " Documentation
 call plug#end()
-
 " ------ Auto Updating Plugins Weekly ------ "
 function! OnVimEnter() abort
   " Run PlugUpdate every week automatically when entering Vim.
@@ -23,7 +24,6 @@ function! OnVimEnter() abort
     if !filereadable(l:filename)
       call writefile([], l:filename)
     endif
-
     let l:this_week = strftime('%Y_%V')
     let l:contents = readfile(l:filename)
     if index(l:contents, l:this_week) < 0
@@ -54,7 +54,7 @@ set nobackup nowritebackup noundofile noswapfile        " Disable backups/swap f
 set ignorecase smartcase incsearch hlsearch             " Text searching
 set number relativenumber                               " Line Numbering
 set wrap linebreak breakindent                          " Line wrapping - purely UI (not saved to file)
-set showbreak=+++\                                      " When text is wrapped, prefix with '+++ ' to signify wrapping
+set showbreak=+++\                                      " When text is wrapped, prefix with '+++ ' to eignify wrapping
 set wildmode=list:lastused,longest,full                 " Auto-complete list preview sorting
 set completeopt=menu,menuone,preview,noselect,noinsert  " Auto-complete menu display settings
 set wildignore+=*.docx,*.jpg,*.png,*.gif,*.pdf          " Add to ignore list when searching for files/ content within files
@@ -74,6 +74,7 @@ set ttyfast                                             " Enable fast scrolling
 set viminfo='100,<9999,s100                             " Store info from no more than 100 files at a time, 9999 lines of text, 100kb of data. Useful for copying large amounts of data between files.
 set noshowmode                                          " No need to notify mode changes, we have them visible perma
 set termguicolors                                       " Enable use of all colours
+set textwidth=0
 let g:bujo#todo_file_path= '$HOME/vimfiles/bujo'        " Buju cache dir
 colorscheme desert                                      " Set colour scheme
 highlight SpellBad cterm=bold ctermbg=darkred           " Spelling error highlighting
@@ -82,16 +83,56 @@ highlight CursorLine cterm=bold ctermbg=black           " Cursor line settings
 
 
 
+" ------ Plugin Customisations ------ "
+
+" ------ Bookmarks ------ "
+let g:bookmark_sign = '♥'
 
 " ------ Rainbow ------ "
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], [ '{', '}'] ]            " Couldn't get quotes working, [ '"', '"' ], [ '''', ''''] ]
-autocmd VimEnter * RainbowParentheses
+let g:rainbow_active = 1
+let g:rainbow_conf = {
+\	'operators': '_,_',
+\	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+\	'separately': {
+\		'*': {},
+\		'markdown': {
+\			'parentheses_options': 'containedin=markdownCode contained', 
+\		},
+\		'lisp': {
+\			'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'], 
+\		},
+\		'haskell': {
+\			'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/\v\{\ze[^-]/ end=/}/ fold'], 
+\		},
+\		'vim': {
+\			'parentheses_options': 'containedin=vimFuncBody', 
+\		}, 
+\		'perl': {
+\			'syn_name_prefix': 'perlBlockFoldRainbow', 
+\		},
+\		'stylus': {
+\			'parentheses': ['start=/{/ end=/}/ fold contains=@colorableGroup'], 
+\		},
+\		'css': 0, 
+\		'nerdtree': 0, 
+\	},
+\}
 
 " ------ Status Line ------ "
+let g:battery_watch_on_startup = 1
 let g:battery#update_statusline = 1
 let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
 let g:vimshell_force_overwrite_statusline = 0
+let g:battery#component_format = '%v%% %g'
+"let g:battery#graph_indicators = [
+"	      \ '     ',
+"	      \ '█    ',
+"	      \ '██   ',
+"	      \ '███  ',
+"	      \ '████ ',
+"	      \ '█████',
+"	      \]
 let g:lightline = {
                 \   'active': {
                 \     'left': [ [ 'mode', 'paste' ], [ 'gitbranch', 'readonly', 'absolutepath', 'modified' ] ],
@@ -116,17 +157,17 @@ let NERDTreeQuitOnOpen=1
 autocmd BufEnter * if winnr() == winnr('h') && bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
     \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
 let g:NERDTreeGitStatusIndicatorMapCustom = {
-                \ 'Modified'  :'M',
-                \ 'Staged'    :'S',
-                \ 'Untracked' :'U',
-                \ 'Renamed'   :'R',
-                \ 'Unmerged'  :'U',
-                \ 'Deleted'   :'X',
-                \ 'Dirty'     :'D',
-                \ 'Ignored'   :'I',
-                \ 'Clean'     :'C',
-                \ 'Unknown'   :'?',
-                \ }
+\ 'Modified'  :'M',
+\ 'Staged'    :'S',
+\ 'Untracked' :'U',
+\ 'Renamed'   :'R',
+\ 'Unmerged'  :'U',
+\ 'Deleted'   :'X',
+\ 'Dirty'     :'D',
+\ 'Ignored'   :'I',
+\ 'Clean'     :'C',
+\ 'Unknown'   :'?',
+\ }
 
 
 " ------ Startify ------ "
@@ -139,12 +180,18 @@ if !isdirectory('$HOME/vimfiles/bujo')
     call mkdir('$HOME/vimfiles/bujo', "p")
 endif
 
+" ------ Indentation Guide ------ "
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
+
 " ------ Mappings ------ "
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
 
 
 
