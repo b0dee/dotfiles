@@ -7,15 +7,14 @@ Plug 'preservim/nerdtree'                               " Best Vim file explorer
 Plug 'Xuyuanp/nerdtree-git-plugin'                      " Git plugin for NERDTree
 Plug 'itchyny/lightline.vim'                            " Vim Status Line 
 Plug 'junegunn/vim-easy-align'                          " Easy aligning by delimiter
-Plug 'luochen1990/rainbow'                              " Rainbow parenthesis - improved
+Plug 'luochen1990/rainbow'                              " Rainbow parenthesis 
 Plug 'mhinz/vim-signify'                                " Show changed lines in a file managed by a VCS
 Plug 'dense-analysis/ale'                               " Language server, linting (async lint engine)
 Plug 'lambdalisue/battery.vim/'                         " Show battery percentage in status bar
 Plug 'mhinz/vim-startify'                               " Vim Start Screen
-Plug 'vuciv/vim-bujo'                                   " Bullet Journal for Vim
 Plug 'MattesGroeger/vim-bookmarks'                      " Vim bookmarking
-Plug 'vimwiki/vimwiki'                                  " Documentation
 call plug#end()
+
 " ------ Auto Updating Plugins Weekly ------ "
 function! OnVimEnter() abort
   " Run PlugUpdate every week automatically when entering Vim.
@@ -66,7 +65,6 @@ set colorcolumn=                                        " Set Colour Column line
 set nospell                                             " Disable spell checking, we enable it ad-hoc when needed
 set background=dark                                     " Background colour theming
 set mouse=a                                             " Enable mouse support
-set cursorline
 set matchpairs+=<:>                                     " Enable matching for tags
 set showmatch                                           " Show matching pairs of [],() and {} (and <> from above line)
 set scroll=0                                            " Moves by 1/2 # of lines in window when using CTRL+D and CTRL+U
@@ -75,10 +73,9 @@ set viminfo='100,<9999,s100                             " Store info from no mor
 set noshowmode                                          " No need to notify mode changes, we have them visible perma
 set termguicolors                                       " Enable use of all colours
 set textwidth=0
-let g:bujo#todo_file_path= '$HOME/vimfiles/bujo'        " Buju cache dir
+set guicursor=n-v-c:block-nCursor
 colorscheme desert                                      " Set colour scheme
 highlight SpellBad cterm=bold ctermbg=darkred           " Spelling error highlighting
-highlight CursorLine cterm=bold ctermbg=black           " Cursor line settings
 
 
 
