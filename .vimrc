@@ -12,6 +12,10 @@ Plug 'dense-analysis/ale'                           " Language server, linting (
 Plug 'lambdalisue/battery.vim/'                     " Show battery percentage in status bar
 Plug 'mhinz/vim-startify'                           " Vim Start Screen
 Plug 'MattesGroeger/vim-bookmarks'                  " Vim bookmarking
+Plug 'tpope/vim-surround'                           " Replace surround paren/quote/etc.
+Plug 'tpope/vim-commentary'                         " Commenting shortcuts
+Plug 'tpope/vim-sensible'                           " Sensible vim mappings
+Plug 'tpope/vim-jdaddy'                             " JSON pretty print and object manipulation
 call plug#end()
 
 " ------ Auto Updating Plugins Weekly ------ "
@@ -55,6 +59,7 @@ set wrap linebreak breakindent                         " Line wrapping - purely 
 set showbreak=+++\                                     " When text is wrapped, prefix with '+++ ' to eignify wrapping
 set wildmode=list:lastused,longest,full                " Auto-complete list preview sorting
 set completeopt=menu,menuone,preview,noselect,noinsert " Auto-complete menu display settings
+set complete-=i                                        " Stop Vim looking through header files for c lookups
 set wildignore+=*.docx,*.jpg,*.png,*.gif,*.pdf         " Add to ignore list when searching for files/ content within files
 set wildignore+=*.pyc,*.exe,*.flv,*.img,*.xlsx         " Above continued
 set encoding=utf-8                                     " Document encoding
@@ -180,6 +185,9 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
+" Remap CTRL + '/' to comment line/selection
+vmap <C-/> gc
+nmap <C-/> gcc
 
 
 
