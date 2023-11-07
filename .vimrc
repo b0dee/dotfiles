@@ -1,5 +1,7 @@
 " ------ PLUGINS ------ "
 call plug#begin()
+Plug 'vim-scripts/LargeFile'                        " Disables some background things Vim does when opening large files
+Plug 'tpope/vim-repeat'                             " Repeat actions made by plugins with `.`
 Plug 'tpope/vim-surround'                           " Replace surround paren/quote/etc.
 Plug 'tpope/vim-sensible'                           " Sensible vim mappings
 Plug 'tpope/vim-jdaddy'                             " JSON pretty print and object manipulation (gqaj/gqij)
@@ -19,7 +21,11 @@ Plug 'Xuyuanp/nerdtree-git-plugin'                  " Git plugin for NERDTree
 Plug 'MattesGroeger/vim-bookmarks'                  " Vim bookmarking
 Plug 'ervandew/supertab'                            " Insert mode tab completion
 Plug 'vim-scripts/ReplaceWithRegister'              " Replace in place with gr<MOTION>
+Plug 'vim-scripts/Auto-Pairs'                       " Auto closing paren, quotes etc.
+Plug 'vim-scripts/Align'                            " Dependency of SQLUtilities"
+Plug 'vim-scripts/SQLUtilities'                     " SQL Formatting (does other stuff, but not useful to us )
 call plug#end()
+
 
 " ------ Auto Updating Plugins Weekly ------ "
 function! OnVimEnter() abort
@@ -84,6 +90,7 @@ set guicursor=n-v-c:block-nCursor
 colorscheme desert                                     " Set colour scheme
 highlight SpellBad cterm=bold ctermbg=darkred          " Spelling error highlighting
 let &t_SI = "\e[5 q"                                   " Blinking line in insert
+let g:LargeFile=100                                    " Activate when file is > 100mb
 
 
 " ------ Plugin Customisations ------ "
@@ -169,6 +176,10 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 let g:startify_session_dir = '$HOME/vimfiles/session'
 let g:startify_files_number = 10
 
+" ------ Supertab ------ "
+" Insert a literal tab when following any of the below chars
+" ^ Start line
+let g:SuperTabNoCompleteAfter = ['^', ',', '\s', '"', '''', ';', '|', '\d']
 
 " ------ Bujo ------ "
 if !isdirectory('$HOME/vimfiles/bujo')
@@ -191,6 +202,14 @@ nmap ga <Plug>(EasyAlign)
 vmap <C-/> gc
 nmap <C-/> gcc
 
+" Format SQL
+vmap <silent> gqas    :SQLUFormatter<CR>
+nmap <silent> gqas    vip gqas
+
+" ------ Useful Shortcuts ------ "
+" Pretty Print Shortcut: `gqa`
+" Format JSON: gqaj (j for json)
+" Format SQL : gqas (s for SQL)
 
 
 
