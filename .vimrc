@@ -191,6 +191,11 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 2
 
+" ------ SQLUtilities ------ " 
+let g:sqlutil_align_comma = 1               " Display columns in select list how SSMS does
+let g:sqlutil_align_keyword_right = 0       " Align keywords on start of word not end of word (see help for more info)
+let g:sqlutil_keyword_case = '\U'           " Auto capitalise keywords 
+
 " ------ Mappings ------ "
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
