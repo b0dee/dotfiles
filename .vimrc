@@ -1,21 +1,24 @@
 " ------ PLUGINS ------ "
 call plug#begin()
-Plug 'tpope/vim-fugitive'                           " Best git plugin for Vim
-Plug 'junegunn/gv.vim'                              " Git commit browser for Vim (dependancy: vim-fugitive)
-Plug 'preservim/nerdtree'                           " Best Vim file explorer
-Plug 'Xuyuanp/nerdtree-git-plugin'                  " Git plugin for NERDTree
-Plug 'itchyny/lightline.vim'                        " Vim Status Line
-Plug 'junegunn/vim-easy-align'                      " Easy aligning by delimiter
-Plug 'luochen1990/rainbow'                          " Rainbow parenthesis
-Plug 'mhinz/vim-signify'                            " Show changed lines in a file managed by a VCS
-Plug 'dense-analysis/ale'                           " Language server, linting (async lint engine)
-Plug 'lambdalisue/battery.vim/'                     " Show battery percentage in status bar
-Plug 'mhinz/vim-startify'                           " Vim Start Screen
-Plug 'MattesGroeger/vim-bookmarks'                  " Vim bookmarking
 Plug 'tpope/vim-surround'                           " Replace surround paren/quote/etc.
-Plug 'tpope/vim-commentary'                         " Commenting shortcuts
 Plug 'tpope/vim-sensible'                           " Sensible vim mappings
-Plug 'tpope/vim-jdaddy'                             " JSON pretty print and object manipulation
+Plug 'tpope/vim-jdaddy'                             " JSON pretty print and object manipulation (gqaj/gqij)
+Plug 'tpope/vim-fugitive'                           " Best git plugin for Vim
+Plug 'tpope/vim-commentary'                         " Commenting shortcuts
+Plug 'preservim/nerdtree'                           " Best Vim file explorer
+Plug 'mhinz/vim-startify'                           " Vim Start Screen
+Plug 'mhinz/vim-signify'                            " Show changed lines in a file managed by a VCS (git)
+Plug 'mg979/vim-visual-multi'                       " Multi line editing shortcuts
+Plug 'luochen1990/rainbow'                          " Rainbow parenthesis
+Plug 'lambdalisue/battery.vim/'                     " Show battery percentage in status bar
+Plug 'junegunn/vim-easy-align'                      " Easy aligning by delimiter
+Plug 'junegunn/gv.vim'                              " Git commit browser for Vim (dependancy: vim-fugitive)
+Plug 'itchyny/lightline.vim'                        " Vim Status Line
+Plug 'dense-analysis/ale'                           " Language server, linting (async lint engine)
+Plug 'Xuyuanp/nerdtree-git-plugin'                  " Git plugin for NERDTree
+Plug 'MattesGroeger/vim-bookmarks'                  " Vim bookmarking
+Plug 'ervandew/supertab'                            " Insert mode tab completion
+Plug 'vim-scripts/ReplaceWithRegister'              " Replace in place with gr<MOTION>
 call plug#end()
 
 " ------ Auto Updating Plugins Weekly ------ "
@@ -81,7 +84,6 @@ set guicursor=n-v-c:block-nCursor
 colorscheme desert                                     " Set colour scheme
 highlight SpellBad cterm=bold ctermbg=darkred          " Spelling error highlighting
 let &t_SI = "\e[5 q"                                   " Blinking line in insert
-
 
 
 " ------ Plugin Customisations ------ "
