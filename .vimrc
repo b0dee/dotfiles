@@ -22,7 +22,7 @@ Plug 'MattesGroeger/vim-bookmarks'                  " Vim bookmarking
 Plug 'ervandew/supertab'                            " Insert mode tab completion
 Plug 'vim-scripts/ReplaceWithRegister'              " Replace in place with gr<MOTION>
 Plug 'vim-scripts/Auto-Pairs'                       " Auto closing paren, quotes etc.
-Plug 'vim-scripts/Align'                            " Dependency of SQLUtilities"
+Plug 'vim-scripts/Align'                            " Dependency of SQLUtilities
 Plug 'vim-scripts/SQLUtilities'                     " SQL Formatting (does other stuff, but not useful to us )
 " One to consider: Plug 'kana/vim-textobj-user'     " Create custom text objects. Get better at Vim first, then we can enhance ourselves even further with customisation
 call plug#end()
