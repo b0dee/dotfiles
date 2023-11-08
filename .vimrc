@@ -24,6 +24,7 @@ Plug 'vim-scripts/ReplaceWithRegister'              " Replace in place with gr<M
 Plug 'vim-scripts/Auto-Pairs'                       " Auto closing paren, quotes etc.
 Plug 'vim-scripts/Align'                            " Dependency of SQLUtilities
 Plug 'vim-scripts/SQLUtilities'                     " SQL Formatting (does other stuff, but not useful to us )
+Plug 'iaalm/terminal-drawer.vim'                    " Terminal shortcut helper (auto-open, auto-focus, auto-close)
 " One to consider: Plug 'kana/vim-textobj-user'     " Create custom text objects. Get better at Vim first, then we can enhance ourselves even further with customisation
 call plug#end()
 
