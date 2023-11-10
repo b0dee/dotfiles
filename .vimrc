@@ -10,7 +10,7 @@ Plug 'tpope/vim-commentary'                         " Commenting shortcuts
 Plug 'preservim/nerdtree'                           " Best Vim file explorer
 Plug 'mhinz/vim-startify'                           " Vim Start Screen
 Plug 'mhinz/vim-signify'                            " Show changed lines in a file managed by a VCS (git)
-Plug 'mg979/vim-visual-multi'                       " Multi line editing shortcuts
+Plug 'mg979/vim-visual-multi'                       " Multi line editing shortcuts (ctrl+n,ctrl+arrows,q to skip, Q to remove)
 Plug 'luochen1990/rainbow'                          " Rainbow parenthesis
 Plug 'lambdalisue/battery.vim/'                     " Show battery percentage in status bar
 Plug 'junegunn/vim-easy-align'                      " Easy aligning by delimiter
@@ -25,7 +25,17 @@ Plug 'vim-scripts/Auto-Pairs'                       " Auto closing paren, quotes
 Plug 'vim-scripts/Align'                            " Dependency of SQLUtilities
 Plug 'vim-scripts/SQLUtilities'                     " SQL Formatting (does other stuff, but not useful to us )
 Plug 'iaalm/terminal-drawer.vim'                    " Terminal shortcut helper (auto-open, auto-focus, auto-close)
-" One to consider: Plug 'kana/vim-textobj-user'     " Create custom text objects. Get better at Vim first, then we can enhance ourselves even further with customisation
+Plug 'markonm/traces.vim'                           " Preview substitutions
+Plug 'itchyny/vim-cursorword'                       " Underline words that match word under cursor 
+Plug 'machakann/vim-highlightedyank'                " Highlight what we yanked
+Plug 'mbbill/undotree'                              " Visualise Vim's undo tree - need to do more reading on this one
+Plug 'ap/vim-css-color'                             " Visualise CSS colours
+Plug 'kana/vim-textobj-user'     " Create custom text objects. Get better at Vim first, then we can enhance ourselves even further with customisation
+Plug 'kana/vim-textobj-line'                        " Custom line object 
+" One to consider: Plug 'cpiger/NeoDebug'           " GDB debugging within Vim
+" One to consider: Plug 'liuchengxu/vista.vim'      " Vim symbol browser
+" One to consider: Plug 'skywind3000/asynctasks.vim'" Run tasks in background
+" i.e. build etc.
 call plug#end()
 
 " ------ Auto Updating Plugins Weekly ------ "
@@ -92,6 +102,7 @@ colorscheme desert                                     " Set colour scheme
 highlight SpellBad cterm=bold ctermbg=darkred          " Spelling error highlighting
 let &t_SI = "\e[5 q"                                   " Blinking line in insert
 let g:LargeFile=100                                    " Activate when file is > 100mb
+let g:SuperTabDefaultCompletionType = "context"
 
 
 " ------ Plugin Customisations ------ "
@@ -182,11 +193,6 @@ let g:startify_files_number = 10
 " ^ Start line
 let g:SuperTabNoCompleteAfter = ['^', ',', '\s', '"', '''', ';', '|', '\d']
 
-" ------ Bujo ------ "
-if !isdirectory('$HOME/vimfiles/bujo')
-    call mkdir('$HOME/vimfiles/bujo', "p")
-endif
-
 " ------ Indentation Guide ------ "
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_guide_size = 1
@@ -212,10 +218,13 @@ nmap <C-/> gcc
 vmap <silent> gqas    :SQLUFormatter<CR>
 nmap <silent> gqas    vip gqas
 
+
+
+
+
+
 " ------ Useful Shortcuts ------ "
 " Pretty Print Shortcut: `gqa`
 " Format JSON: gqaj (j for json)
 " Format SQL : gqas (s for SQL)
-
-
 
