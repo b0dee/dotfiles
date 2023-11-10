@@ -20,6 +20,18 @@ cd ~/repos/.dotfiles
 setup.cmd
 ```
 
+Create registry key `Computer\HKEY_CURRENT_USER\Software\Microsoft\Command Processor` Name: `Autorun` Type: `REG_SZ` pointing to `%userprofile%\.doskey`
+TODO: Add this to set up script 
+
+Dependancy: MS Power Toys
+- Enable PowerToys Run (shortcut set to alt+shift+s)
+- Enable Keyboard Shortcuts 
+  * Caps Lock -> Escape
+  * Left WinKey -> Disabled
+TODO: Add this to set up script 
+
+Dependancy: GlazeWM
+TODO: Add this to set up script 
 
 Notes
 -----

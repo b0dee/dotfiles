@@ -1,0 +1,5 @@
+ls=dir /B $*
+ip=ipconfig $*
+checkbackups="c:\Users\Joe.Paterson\repos\work\tissl\admin\scripts\backups\run.cmd"
+vi=vim $*
+nosc=net stop "ScreenConnect Client (1c90f605db3331c8)"
