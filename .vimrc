@@ -32,6 +32,8 @@ Plug 'mbbill/undotree'                              " Visualise Vim's undo tree 
 Plug 'ap/vim-css-color'                             " Visualise CSS colours
 Plug 'kana/vim-textobj-user'     " Create custom text objects. Get better at Vim first, then we can enhance ourselves even further with customisation
 Plug 'kana/vim-textobj-line'                        " Custom line object 
+"Plug 'mattn/emmet-vim'                             " Snippets 
+"Plug 'SirVer/ultisnips'                            " Snippets 
 " One to consider: Plug 'cpiger/NeoDebug'           " GDB debugging within Vim
 " One to consider: Plug 'liuchengxu/vista.vim'      " Vim symbol browser
 " One to consider: Plug 'skywind3000/asynctasks.vim'" Run tasks in background
