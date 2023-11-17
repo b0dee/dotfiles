@@ -4,4 +4,4 @@ checkbackups="c:\Users\Joe.Paterson\repos\work\my_work_git\tissl\admin\scripts\b
 vi=vim $*
 nosc=net stop "ScreenConnect Client (1c90f605db3331c8)"
 touch=echo. > $*
-dir=dir /G $*
+dir=dir /OG $*
