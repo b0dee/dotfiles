@@ -104,8 +104,6 @@ let &t_SI = "\e[5 q"                                   " Blinking line in insert
 let g:LargeFile=100                                    " Activate when file is > 100mb
 let g:SuperTabDefaultCompletionType = "context"
 set shiftround
-set completeopt=menuone,noinsert,noselect,popuphidden
-set completepopup=highlight:Pmenu,border:off
 
 "
 " ------ Plugin Customisations ------ "
