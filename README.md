@@ -30,9 +30,6 @@ Dependancy: MS Power Toys
   * Left WinKey -> Disabled
 TODO: Add this to set up script 
 
-Dependancy: GlazeWM
-TODO: Add this to set up script 
-
 Notes
 -----
 
