@@ -111,7 +111,7 @@ window_rules:
 
   # User defined windows that should always be floating
   - command: "set floating"
-    match_process_name: "/ScreenConnect/"
+    match_process_name: "/ScreenConnect|AppMngr|pm_fb|vncviewer/"
 
   # Some applications (eg. Steam) have borders that extend past the normal border size.
   - command: "resize borders 0px -7px -7px -7px"
