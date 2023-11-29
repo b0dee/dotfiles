@@ -32,7 +32,6 @@ Plug 'mbbill/undotree'                              " Visualise Vim's undo tree 
 Plug 'ap/vim-css-color'                             " Visualise CSS colours
 Plug 'kana/vim-textobj-user'     " Create custom text objects. Get better at Vim first, then we can enhance ourselves even further with customisation
 Plug 'kana/vim-textobj-line'                        " Custom line object 
-Plug 'OmniSharp/omnisharp-vim'                      " IDE like capabilitie for C# file
 " One to consider: Plug 'cpiger/NeoDebug'           " GDB debugging within Vim
 " One to consider: Plug 'liuchengxu/vista.vim'      " Vim symbol browser
 " One to consider: Plug 'skywind3000/asynctasks.vim'" Run tasks in background
@@ -110,29 +109,6 @@ set completepopup=highlight:Pmenu,border:off
 
 "
 " ------ Plugin Customisations ------ "
-
-" ------ ALE ------ "
-let g:ale_linters = { 'cs': ['OmniSharp'] }
-
-" ------ OmniSharp ------ "
-let g:OmniSharp_popup_position = 'atcursor'
-let g:OmniSharp_popup_options = {
-  \ 'highlight': 'Normal',
-  \ 'padding': [0],
-  \ 'border': [1],
-  \ 'borderchars': ['─', '│', '─', '│', '╭', '╮', '╯', '╰'],
-  \ 'borderhighlight': ['ModeMsg']
-  \}
-let g:OmniSharp_popup_mappings = {
-\ 'sigNext': '<C-n>',
-\ 'sigPrev': '<C-p>',
-\ 'pageDown': ['<C-f>', '<PageDown>'],
-\ 'pageUp': ['<C-b>', '<PageUp>']
-\}
-let g:OmniSharp_highlight_groups = {
-\ 'ExcludedCode': 'NonText'
-\}
-
 
 " ------ Bookmarks ------ "
 let g:bookmark_sign = '♥'
@@ -244,10 +220,6 @@ nmap <C-/> gcc
 " Format SQL
 vmap <silent> gqas    :SQLUFormatter<CR>
 nmap <silent> gqas    vip gqas
-
-
-
-
 
 
 " ------ Useful Shortcuts ------ "
